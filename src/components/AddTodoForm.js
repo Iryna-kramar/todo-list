@@ -1,13 +1,41 @@
 import { React, useState } from "react";
+import { connect } from "react-redux";
+import { addTodos } from "../redux/reducer";
 
-const AddTodoForm = () => {
+const mapStateToProps = (state) => {
+  return {
+    todos: state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (obj) => dispatch(addTodos(obj)),
+  };
+};
+
+const AddTodoForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  console.log("props", props);
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onDescriptionChanged = (e) => setDescription(e.target.value);
 
-  const addTodoItem = () => {};
+  const addTodoItem = () => {
+    if (title === "") {
+      alert("Enter Todo item");
+    } else {
+      props.addTodo({
+        id: Math.floor(Math.random() * 1000),
+        title: title,
+        description: description,
+        completed: false,
+      });
+      setTitle("");
+      setDescription("");
+    }
+  };
 
   return (
     <div>
@@ -15,15 +43,12 @@ const AddTodoForm = () => {
         <label htmlFor="title">Todo Title:</label>
         <input
           type="text"
-          id=""
           name="title"
           value={title}
           onChange={onTitleChanged}
         />
-
         <label htmlFor="description">Description:</label>
         <textarea
-          id=""
           name="description"
           value={description}
           onChange={onDescriptionChanged}
@@ -36,4 +61,4 @@ const AddTodoForm = () => {
   );
 };
 
-export default AddTodoForm;
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodoForm);
