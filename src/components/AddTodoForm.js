@@ -29,7 +29,7 @@ const AddTodoForm = () => {
           onChange={onDescriptionChanged}
         />
         <button type="button" onClick={addTodoItem}>
-          Save Post
+          Add Todo
         </button>
       </form>
     </div>
