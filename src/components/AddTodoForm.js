@@ -18,7 +18,7 @@ const AddTodoForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  console.log("props", props);
+  // console.log("props", props);
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onDescriptionChanged = (e) => setDescription(e.target.value);
 
