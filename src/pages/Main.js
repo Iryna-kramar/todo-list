@@ -5,11 +5,9 @@ import TodoList from "./../components/TodoList";
 
 function Main(props) {
   return (
-    <div>
-      <h1>Todo App</h1>
+    <div className="main">
       <AddTodoForm />
       <TodoList />
-
     </div>
   );
 }

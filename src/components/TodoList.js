@@ -25,11 +25,14 @@ const mapDispatchToProps = (dispatch) => {
 
 function TodoList(props) {
   const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
   const { todos } = props;
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+  console.log(todos, "todos");
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
 
   const filteredTodos = todos.filter((item) => {
@@ -42,9 +45,25 @@ function TodoList(props) {
     }
   });
 
+  const searchedTodos = todos.filter(
+    (todo) =>
+      todo.title.toLowerCase().includes(search.toLowerCase()) ||
+      todo.description.toLowerCase().includes(search.toLowerCase())
+    // todo.dueDate.includes(search)
+  );
+  const displayTodos = search ? searchedTodos : filteredTodos;
+
   return (
-    <div>
+    <div className="todo-list">
       <div className="sort">
+        <div>
+          <input
+            type="text"
+            placeholder="Enter to search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
         <select value={filter} onChange={handleFilterChange}>
           <option value="active">Active</option>
           <option value="completed">Completed</option>
@@ -52,8 +71,8 @@ function TodoList(props) {
         </select>
       </div>
       <ul>
-        {filteredTodos.length > 0 &&
-          filteredTodos.map((item) => (
+        {displayTodos.length > 0 &&
+          displayTodos.map((item) => (
             <TodoItem
               key={item.id}
               item={item}
@@ -62,7 +81,7 @@ function TodoList(props) {
               completeTodo={props.completeTodo}
             />
           ))}
-    </ul>
+      </ul>
     </div>
   );
 }

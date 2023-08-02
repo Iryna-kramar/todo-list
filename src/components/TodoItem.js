@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useParams, Link } from "react-router-dom";
 import { AiFillEdit } from "react-icons/ai";
 import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 
@@ -22,10 +23,18 @@ const TodoItem = (props) => {
   return (
     <li key={item.id} className="card">
       <input
+        className="card-title"
         type="text"
         name="todoItem"
         ref={inputRef}
-        value={item.title}
+        defaultValue={item.title}
+        onKeyPress={(e) => edit(item.id, inputRef.current.value, e)}
+      />
+      <textarea
+        type="text"
+        name="todoItem"
+        ref={inputRef}
+        defaultValue={item.description}
         onKeyPress={(e) => edit(item.id, inputRef.current.value, e)}
       />
       <div className="btns">

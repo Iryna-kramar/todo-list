@@ -42,10 +42,6 @@ const addTodoReducer = createSlice({
   },
 });
 
-export const {
-  addTodos,
-  removeTodos,
-  editTodos,
-  completeTodos,
-} = addTodoReducer.actions;
+export const { addTodos, removeTodos, editTodos, completeTodos } =
+  addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;

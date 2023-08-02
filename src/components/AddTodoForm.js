@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { connect } from "react-redux";
 import { addTodos } from "../redux/reducer";
+import { GoPlus } from "react-icons/go";
 
 const mapStateToProps = (state) => {
   return {
@@ -38,10 +39,11 @@ const AddTodoForm = (props) => {
   };
 
   return (
-    <div>
-      <form>
+    <div className="addTodos">
+      <form className="addForm">
         <label htmlFor="title">Todo Title:</label>
         <input
+          className="todo-input"
           type="text"
           name="title"
           value={title}
@@ -49,12 +51,13 @@ const AddTodoForm = (props) => {
         />
         <label htmlFor="description">Description:</label>
         <textarea
+          className="todo-input"
           name="description"
           value={description}
           onChange={onDescriptionChanged}
         />
-        <button type="button" onClick={addTodoItem}>
-          Add Todo
+        <button className="add-btn" type="button" onClick={addTodoItem}>
+          <GoPlus />
         </button>
       </form>
     </div>
